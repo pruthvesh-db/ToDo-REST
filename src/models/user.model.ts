@@ -44,7 +44,7 @@ userSchema.methods.generateAuthToken = function (): string {
         throw new Error("JWT_SECRET is not defined in environment variables");
     }
     const token = jwt.sign({ _id: this._id }, secret, {
-        expiresIn: "24h",
+        expiresIn: "10m",
     });
     return token;
 };
@@ -55,4 +55,4 @@ userSchema.methods.comparePassword = async function(password: string): Promise<b
     return await bcrypt.compare(password, this.password);
 };
 
-export default mongoose.model<userDocument>("Users", userSchema);
+export default mongoose.model<userDocument>("user", userSchema);

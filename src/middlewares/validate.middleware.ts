@@ -4,7 +4,11 @@ import { check, validationResult, ValidationChain } from "express-validator";
 // Credentials Validation Middleware
 const validateSignup: ValidationChain[] = [
   check("email").isEmail().withMessage("Please provide a valid email"),
-  check("password").isLength({ min: 6 }).withMessage("Password must be at least 6 characters long"),
+  check("password").isLength({ min: 6 }).withMessage("Password must be at least 6 characters long")
+  .matches(/[A-Z]/).withMessage("Password must contain at least one uppercase letter")
+  .matches(/[a-z]/).withMessage("Password must contain at least one lowercase letter")
+  .matches(/[0-9]/).withMessage("Password must contain at least one number")
+  .matches(/[@$!%*?&]/).withMessage("Password must contain at least one special character")
 ];
 
 const validateLogin: ValidationChain[] = [
@@ -17,7 +21,8 @@ const validateLogin: ValidationChain[] = [
 const handleValidationErrors = (req: Request, res: Response, next: NextFunction): any => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    const errorMessages = errors.array().map(error => error.msg);
+    return res.status(400).json({ errors: errorMessages });
   }
   next();
 };

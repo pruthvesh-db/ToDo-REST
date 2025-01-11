@@ -5,7 +5,7 @@ import connectDB from './db-config/dbConnection';
 import userRoutes from './routes/user.routes';
 import taskRoutes from './routes/task.routes';
 import isAuthenticate from './middlewares/auth.middleware';
-import "./types/express";
+import taskCompleted from './cron/task.cron';
 
 const PORT = process.env.PORT || 3000;
 
@@ -17,6 +17,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/tasks', isAuthenticate, taskRoutes);
 
 connectDB();
+taskCompleted();
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
