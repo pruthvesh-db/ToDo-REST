@@ -14,7 +14,7 @@ const taskSchema: Schema<taskDocument> = new Schema(
         description: {type: String, required: true},
         dueDate: {type: Date, required: true},
         completed: {type: Boolean, default: false},
-        user: {type: Schema.Types.ObjectId, ref: "Users", required: true}
+        user: {type: Schema.Types.ObjectId, ref: "user", required: true}
     },
     {
         timestamps: true
