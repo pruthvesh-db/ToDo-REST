@@ -4,13 +4,13 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-interface CustomRequest extends Request {
-  user?: {
-    _id: string;
-  };
-}
+// interface Request extends Request {
+//   user?: {
+//     _id: string;
+//   };
+// }
 
-const isAuthenticate = async (req: CustomRequest, res: Response, next: NextFunction): Promise<void> => {
+const isAuthenticate = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   const token = req.headers.authorization?.split(" ")[1];
 
   if (!token) {

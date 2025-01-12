@@ -5,7 +5,9 @@ import connectDB from './db-config/dbConnection';
 import userRoutes from './routes/user.routes';
 import taskRoutes from './routes/task.routes';
 import isAuthenticate from './middlewares/auth.middleware';
-import taskCompleted from './cron/task.cron';
+import taskCompletedCron from './cron/task.cron';
+
+
 
 const PORT = process.env.PORT || 3000;
 
@@ -16,9 +18,19 @@ app.use(bodyParser.json());
 app.use('/api/users', userRoutes);
 app.use('/api/tasks', isAuthenticate, taskRoutes);
 
-connectDB();
-taskCompleted();
+const startServer = async () => {
+  try {
+    await connectDB(); // Connect to the database
+    taskCompletedCron(); // Start the cron job
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+    // Start the Express server
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("Error starting the server:", error);
+    process.exit(1); 
+  }
+};
+
+startServer();

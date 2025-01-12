@@ -1,0 +1,177 @@
+# ToDo REST API
+
+## Project Setup
+
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/pruthvesh-db/ToDo-REST.git
+    ```
+2. Navigate to the project directory:
+    ```sh
+    cd ToDo-REST
+    ```
+3. Install dependencies:
+    ```sh
+    npm install
+    ```
+4. Set up environment variables:
+    - Create a `.env` file in the root directory.
+    - Add the following variables:
+        ```
+        PORT=3001
+        DB_HOST=your_database_uri
+        JWT_SECRET=your_jwt_secret
+        CRON_TIMER="* * * * *"
+        ```
+5. Run Server in Dev:
+    ```sh
+    npm run dev
+    ```
+
+5. Build the Project:
+    ```sh
+    npm run build
+    ```
+
+5. Start the server:
+    ```sh
+    npm start
+    ```
+
+## User API Routes
+
+### User Signup
+
+- **URL:** `/api/users/signup`
+- **Method:** `POST`
+- **Request Body:**
+    ```json
+    {
+        "email": "user email",
+        "password": "examplePassword"
+    }
+    ```
+- **Response:**
+    ```json
+    {
+        "message": "User registered successfully",
+    }
+    ```
+
+### User Login
+
+- **URL:** `/api/users/login`
+- **Method:** `POST`
+- **Request Body:**
+    ```json
+    {
+        "email": "user email",
+        "password": "examplePassword"
+    }
+    ```
+- **Response:**
+    ```json
+    {
+        "message": "Login successful",
+        "token": "jwt_token"
+    }
+    ```
+
+## Task API Routes
+
+### Create Task
+
+- **URL:** `/api/tasks`
+- **Method:** `POST`
+- **Request Header:**
+    ```json
+    {
+        "Authorization": "Bearer jwt_token"
+    }
+    ```
+- **Request Body:**
+    ```json
+    {
+        "title": "New Task",
+        "description": "Task description",
+        "dueDate": "YYYY-MM-DD"
+    }
+    ```
+- **Response:**
+    ```json
+    {
+        "message": "Task created successfully",
+        "task": {"Task Object"}
+    }
+    ```
+
+### Get All Tasks
+
+- **URL:** `/api/tasks`
+- **Method:** `GET`
+- **Request Header:**
+    ```json
+    {
+        "Authorization": "Bearer jwt_token"
+    }
+    ```
+- **Response:**
+    ```json
+    [
+        {
+            "_id": "task_id",
+            "title": "Task Title",
+            "description": "Task description",
+            "dueDate": "Due date of Task",
+            "completed": false,
+            "user": "User unique ID",
+            "createdAt": "Created Date",
+            "updatedAt": "Updated Date",
+            "__v": 0
+        }
+    ]
+    ```
+
+### Update Task
+
+- **URL:** `/api/tasks/:taskId`
+- **Method:** `PUT`
+- **Request Header:**
+    ```json
+    {
+        "Authorization": "Bearer jwt_token"
+    }
+    ```
+- **Request Body:**
+    ```json
+    {
+        "title": "Updated Task Title",
+        "description": "Updated Task description",
+        "completed": true,
+        "dueDate": "YYYY-MM-DD"
+    }
+    ```
+- **Response:**
+    ```json
+    {
+        "message": "Task updated successfully",
+        "task": {"Task Object"}
+    }
+    ```
+
+### Delete Task
+
+- **URL:** `/api/tasks/:taskId`
+- **Method:** `DELETE`
+- **Request Header:**
+    ```json
+    {
+        "Authorization": "Bearer jwt_token"
+    }
+    ```
+- **Response:**
+    ```json
+    {
+        "message": "Task deleted successfully"
+    }
+    ```

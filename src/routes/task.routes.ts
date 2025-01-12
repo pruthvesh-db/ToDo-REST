@@ -6,9 +6,9 @@ import { validateTask, handleValidationErrors } from '../middlewares/taskValidat
 
 const router = express.Router();
 
-router.post('/create',validateTask, handleValidationErrors, createTask);
-router.get('/read', readTasks);
-router.put('/update/:id', updateTask);
-router.delete('/delete/:id', deleteTask);
+router.post('/',validateTask, handleValidationErrors, createTask);
+router.get('/', readTasks);
+router.put('/:id', updateTask);
+router.delete('/:id', deleteTask);
 
 export default router;

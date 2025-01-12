@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // Task Cron Job
-const taskCompleted = async () => {
+const taskCompletedCron = async () => {
     try {
       console.log("CRON Job: Checking for expired tasks...");
       const now = new Date();
@@ -22,11 +22,11 @@ const taskCompleted = async () => {
   };
 
 // Run the cron job \
-const cronTimer = process.env.CRON_TIMER || "0 0 * * *";
+const cronTimer = process.env.CRON_TIMER || "0 0 * * *"; // Default: Run every day at midnight
 
 cron.schedule(cronTimer, async () => {
-    await taskCompleted();
+    await taskCompletedCron();
     console.log("CRON Job executed successfully.");
   });
   
-export default taskCompleted;
+export default taskCompletedCron;

@@ -29,7 +29,7 @@ const signup = async (req: Request, res: Response): Promise<any>  => {
       if (!isPasswordValid) return res.status(400).json({ message: "Invalid credentials" });
   
       const token = users.generateAuthToken();
-      res.status(200).json({ token });
+      res.status(200).json({ message: "Login Succesful", token });
       
     } catch (error) {
       res.status(500).json({ message: "Server error", error });

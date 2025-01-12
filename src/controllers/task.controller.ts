@@ -1,14 +1,9 @@
 import { Request, Response } from "express";
 import Task from "../models/task.model";
 
-interface CustomRequest extends Request {
-  user?: {
-    _id: string;
-  };
-}
 
 // Create a new task
-const createTask = async (req: CustomRequest, res: Response): Promise<void> => {
+const createTask = async (req: Request, res: Response): Promise<void> => {
   const { title, description, dueDate } = req.body;
 
   if (!req.user || !req.user._id) {
@@ -27,7 +22,7 @@ const createTask = async (req: CustomRequest, res: Response): Promise<void> => {
 };
 
 // Read all tasks for the authenticated user
-const readTasks = async (req: CustomRequest, res: Response): Promise<void> => {
+const readTasks = async (req: Request, res: Response): Promise<void> => {
   if (!req.user || !req.user._id) {
     res.status(401).json({ message: "Unauthorized" });
     return;
@@ -41,8 +36,9 @@ const readTasks = async (req: CustomRequest, res: Response): Promise<void> => {
   }
 };
 
+
 // Update a task by ID
-const updateTask = async (req: CustomRequest, res: Response): Promise<void> => {
+const updateTask = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
   const { title, description, dueDate, completed } = req.body;
 
@@ -70,7 +66,7 @@ const updateTask = async (req: CustomRequest, res: Response): Promise<void> => {
 };
 
 // Delete a task by ID
-const deleteTask = async (req: CustomRequest, res: Response): Promise<void> => {
+const deleteTask = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
 
   if (!req.user || !req.user._id) {
