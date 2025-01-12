@@ -22,6 +22,7 @@
         DB_HOST=your_database_uri
         JWT_SECRET=your_jwt_secret
         CRON_TIMER="* * * * *"
+        JWT_EXPIRATION=token_expire_duration
         ```
 5. Run Server in Dev:
     ```sh
