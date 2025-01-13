@@ -29,12 +29,12 @@
     npm run dev
     ```
 
-5. Build the Project:
+6. Build the Project:
     ```sh
     npm run build
     ```
 
-5. Start the server:
+7. Start the server:
     ```sh
     npm start
     ```
