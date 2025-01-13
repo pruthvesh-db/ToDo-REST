@@ -19,7 +19,7 @@
     - Add the following variables:
         ```
         PORT=3001
-        DB_HOST=your_database_uri
+        DB_HOST=your_database_uri/Database_name    
         JWT_SECRET=your_jwt_secret
         CRON_TIMER="* * * * *"
         JWT_EXPIRATION=token_expire_duration
